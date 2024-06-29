@@ -13,6 +13,7 @@ To compile the code (Ubuntu tested):
 ```
 git clone https://github.com/iz4tow/rigctl_gui.git
 cd rigctl_gui
+go mod tidy
 go build flexmanager.go
 ```
 
