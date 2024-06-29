@@ -27,19 +27,20 @@ go mod tidy
 go build flexmanager.go
 ```
 
-To compile the code in Windows (not tested yet):
+To compile the code in Windows:
+Install Fyne for Windows following this guide: https://docs.fyne.io/started/
 ```
 git clone https://github.com/iz4tow/rigctl_gui.git
 cd rigctl_gui
-del go.mod
-del go.sum
 go init flexmanager
 go mod tidy
 go build flexmanager.go
 ```
 
-### Download the release
-Install Hamlib
+### Install from releae
+
+#### Linux
+Install Hamlib on Linux
 ```
 git clone https://github.com/Hamlib/Hamlib
 cd Hamlib
@@ -51,3 +52,7 @@ sudo make install
 cd ..
 ```
 Download rigctl-gui from release and execute it.
+
+#### Windows
+Download and install Hamlib for Windows https://github.com/Hamlib/Hamlib/releases
+Download rigctl-gui.zip and unzip it on a folder, then just execute it
