@@ -13,7 +13,7 @@ import (
 )
 
 func getmode () (string) {
-	getmodecmd := exec.Command("/usr/local/bin/rigctl","-m2", "m")
+	getmodecmd := exec.Command("rigctl","-m2", "m")
 	retmod, _ := getmodecmd.Output()
 	mode := strings.SplitN(string(retmod), "\n", 2)
 	return mode[0]
@@ -51,8 +51,8 @@ func main() {
 	w.Resize(fyne.NewSize(300, 100))
 	// Input field for frq
 	input := widget.NewEntry()
-	getfreqcmd := exec.Command("/usr/local/bin/rigctl","-m2", "f")
-	getpwrcmd := exec.Command("/usr/local/bin/rigctl","-m2", "l", "RFPOWER")
+	getfreqcmd := exec.Command("rigctl","-m2", "f")
+	getpwrcmd := exec.Command("rigctl","-m2", "l", "RFPOWER")
 	freq, err := getfreqcmd.Output()
 	pwr,_ := getpwrcmd.Output()
 	if err != nil {
@@ -61,7 +61,7 @@ func main() {
 	input.SetPlaceHolder(string(freq))
 	fmt.Println(pwr)
 
-	// Send button
+	//Buttons
 	AMButton := widget.NewButton("AM", func() {
 		fmt.Println("AM")
 	})
@@ -77,26 +77,40 @@ func main() {
 		fmt.Println("LSB")
 	})
 	
+	
 	go func() {
 		for range time.Tick(time.Second) {
 			updateButtons(AMButton,FMButton,USBButton,LSBButton)
 		}
 	}()
 
+
+	frqButton := widget.NewButton("Set frq", func() { //Set frq
+		_ = exec.Command("rigctl","-m2", "F",input.Text)
+	})
+	input.OnSubmitted = func(string) { //Set freq if ENTER is pressed inside input entry
+		_ = exec.Command("rigctl","-m2", "F",input.Text)
+	}
+
 	valueLabel := widget.NewLabel("Current value: 0.00")
 	mySlider := widget.NewSlider(0, 100)
 
 	// Update the label text whenever the slider value changes
 	mySlider.OnChanged = func(value float64) {
-		valueLabel.SetText(fmt.Sprintf("RF Power: %.2f", value))
+		valueLabel.SetText(fmt.Sprintf("RF Power: %.0f", value))
 		power:=strconv.FormatFloat(value/100, 'f', -1, 64)
-		fmt.Println(power)
-		_ = exec.Command("/usr/local/bin/rigctl","-m2", "L", "RFPOWER", power)
+		_ = exec.Command("rigctl","-m2", "L", "RFPOWER", power)
 	}
 	// Arrange elements
 	w.SetContent(
 		container.NewBorder(
-		input,
+		container.NewBorder(
+			nil,
+			nil,
+			nil,
+			frqButton,
+			input,
+			),
 		container.NewBorder(
 			mySlider,
 			valueLabel,
