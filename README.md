@@ -4,7 +4,7 @@
 This is a simple GUI for rigctl written in GO for hamlib enthusiast like me.
 
 ## Description
-This program alongside with Hamlib permit to send command to your radio using CAT protocol, very helpful for hamradio amateur like me.
+This program alongside with Hamlib permit to send command to your radio using CAT protocol, very helpful for hamradio amateurs.
 
 ## Install
 
