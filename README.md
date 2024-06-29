@@ -11,6 +11,16 @@ This program alongside with Hamlib permit to send command to your radio using CA
 ### Compile from source
 To compile the code in Linux (Ubuntu tested):
 ```
+#Install HAMLIB
+git clone https://github.com/Hamlib/Hamlib
+cd Hamlib
+./bootstrap
+./configure
+make
+#make check
+sudo make install
+cd ..
+#INSTALL RIGCTL GUI
 git clone https://github.com/iz4tow/rigctl_gui.git
 cd rigctl_gui
 go mod tidy
@@ -29,3 +39,15 @@ go build flexmanager.go
 ```
 
 ### Download the release
+Install Hamlib
+```
+git clone https://github.com/Hamlib/Hamlib
+cd Hamlib
+./bootstrap
+./configure
+make
+#make check
+sudo make install
+cd ..
+```
+Download rigctl-gui from release and execute it.
