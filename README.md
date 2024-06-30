@@ -52,7 +52,8 @@ Pay Attention, if you are on a Virtualbox environment with a Windows guest you m
 ### Install from release
 
 #### Linux
-Install Hamlib on Linux
+If you are using Ubuntu you can look at the next paragraph for .deb installation instructions.
+Install Hamlib on Linux then download rigctl-gui from release.
 ```
 git clone https://github.com/Hamlib/Hamlib
 cd Hamlib
@@ -64,11 +65,20 @@ sudo make install
 cd ..
 
 #Download rigctl-gui from release with wget as follow or download it manually
-wget https://github.com/iz4tow/rigctl_gui/releases/download/release/rigctl-gui-Linux-amd64
+wget https://github.com/iz4tow/rigctl_gui/releases/download/v1/rigctl-gui-linux-amd64
 sudo chmod +x rigctl-gui-Linux-amd64
 
 #to execute it
 ./rigctl-gui-Linux-amd64
+```
+
+#### Ubuntu
+Simply download .deb package from relase page the install with apt.
+The package will install last release of Hamlib (and all the required packages) then rigctl-gui.
+```
+wget https://github.com/iz4tow/rigctl_gui/releases/download/v1/rigctl-gui.deb
+sudo apt update
+sudo apt install -y ./rigctl-gui.deb
 ```
 
 #### Windows
