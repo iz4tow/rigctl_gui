@@ -6,7 +6,6 @@ import (
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
-	"time"
 	"os/exec"
 	"strings"
 	"strconv"
@@ -55,11 +54,14 @@ func main() {
 	getpwrcmd := exec.Command("rigctl","-m2", "l", "RFPOWER")
 	freq, err := getfreqcmd.Output()
 	pwr,_ := getpwrcmd.Output()
+	strpwr:=string(pwr)
+	strpwr=strings.TrimSpace(strpwr)//trim all spaces and newline
+	flpwr, _ :=  strconv.ParseFloat(strpwr, 64)
+	//intpwr:=int(flpwr*100)
 	if err != nil {
 		fmt.Println(err)
 	}
-	input.SetPlaceHolder(string(freq))
-	fmt.Println(pwr)
+	input.SetText(string(freq))
 
 	//Buttons
 	AMButton := widget.NewButton("AM", func() {
@@ -76,30 +78,30 @@ func main() {
 	LSBButton := widget.NewButton("LSB", func() {
 		fmt.Println("LSB")
 	})
-	
-	
-	go func() {
-		for range time.Tick(time.Second) {
-			updateButtons(AMButton,FMButton,USBButton,LSBButton)
-		}
-	}()
-
-
+	updateButtons(AMButton,FMButton,USBButton,LSBButton)
 	frqButton := widget.NewButton("Set frq", func() { //Set frq
 		_ = exec.Command("rigctl","-m2", "F",input.Text)
+		updateButtons(AMButton,FMButton,USBButton,LSBButton)
 	})
-	input.OnSubmitted = func(string) { //Set freq if ENTER is pressed inside input entry
-		_ = exec.Command("rigctl","-m2", "F",input.Text)
-	}
+//BUGHERE
+//	input.OnSubmitted = func(string) { //Set freq if ENTER is pressed inside input entry
+//		_ = exec.Command("rigctl","-m2", "F",input.Text)
+//		updateButtons(AMButton,FMButton,USBButton,LSBButton)
+//	}
 
-	valueLabel := widget.NewLabel("Current value: 0.00")
+	valueLabel := widget.NewLabel("Current value: 0")
 	mySlider := widget.NewSlider(0, 100)
+	mySlider.SetValue(flpwr*100)//set current value of RFPOWER 
 
 	// Update the label text whenever the slider value changes
 	mySlider.OnChanged = func(value float64) {
 		valueLabel.SetText(fmt.Sprintf("RF Power: %.0f", value))
 		power:=strconv.FormatFloat(value/100, 'f', -1, 64)
-		_ = exec.Command("rigctl","-m2", "L", "RFPOWER", power)
+		setpwr:= exec.Command("rigctl","-m2", "L", "RFPOWER", power)
+		_,err := setpwr.Output()
+		if err != nil {
+			fmt.Println(err)
+		}
 	}
 	// Arrange elements
 	w.SetContent(
@@ -132,12 +134,6 @@ func main() {
 		),
 	)
 	
-
-
-
-
-
-
 	w.ShowAndRun()
 }
 
