@@ -89,9 +89,10 @@ func main() {
 //		updateButtons(AMButton,FMButton,USBButton,LSBButton)
 //	}
 
-	valueLabel := widget.NewLabel("Current value: 0")
 	mySlider := widget.NewSlider(0, 100)
-	mySlider.SetValue(flpwr*100)//set current value of RFPOWER 
+	mySlider.SetValue(flpwr*100)//set current value of RFPOWER
+	valueLabel := widget.NewLabel("RF Power: ")
+	valueLabel.SetText(fmt.Sprintf("RF Power: %.0f", flpwr*100))
 
 	// Update the label text whenever the slider value changes
 	mySlider.OnChanged = func(value float64) {
