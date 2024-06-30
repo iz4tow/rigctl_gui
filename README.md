@@ -6,9 +6,7 @@ This is a simple GUI (Graphical User Interface) for rigctl written in GO for ham
 ## Description
 This program alongside with Hamlib permit to send command to your radio using CAT protocol, very helpful for hamradio amateurs.
 
-## Install
-
-### Compile from source
+## Compile from source
 To compile the code in Linux (Ubuntu tested):
 ```
 #Install HAMLIB
@@ -49,9 +47,9 @@ cd rigctl_gui
 ```
 Pay Attention, if you are on a Virtualbox environment with a Windows guest you must add opengl32.dll to your project folder! You can find it in release file for windows alongside rigctl-gui.exe.
 
-### Install from release
+## Install from release
 
-#### Linux
+### Linux
 If you are using Ubuntu you can look at the next paragraph for .deb installation instructions.
 Install Hamlib on Linux then download rigctl-gui from release.
 ```
@@ -72,7 +70,7 @@ sudo chmod +x rigctl-gui-Linux-amd64
 ./rigctl-gui-Linux-amd64
 ```
 
-#### Ubuntu
+### Ubuntu
 Simply download .deb package from relase page the install with apt.
 The package will install last release of Hamlib (and all the required packages) then rigctl-gui.
 ```
@@ -81,7 +79,7 @@ sudo apt update
 sudo apt install -y ./rigctl-gui.deb
 ```
 
-#### Windows
+### Windows
 Download and install Hamlib for Windows https://github.com/Hamlib/Hamlib/releases.
 Add Hamlib bin folder to $PATH.
 Download rigctl-gui.zip and unzip it on a folder, then just execute it.
