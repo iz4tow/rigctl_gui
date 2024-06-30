@@ -1,4 +1,6 @@
 ![GoCompileStatus](https://github.com/iz4tow/rigctl_gui/actions/workflows/go.yml/badge.svg)
+![golang-lint](https://github.com/iz4tow/rigctl_gui/actions/workflows/golang-lint.yml/badge.svg)
+
 
 # Hamlib rigctl GUI
 This is a simple GUI (Graphical User Interface) for rigctl written in GO for hamlib enthusiast like me.
