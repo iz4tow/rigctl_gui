@@ -49,7 +49,7 @@ cd rigctl_gui
 ```
 Pay Attention, if you are on a Virtualbox environment with a Windows guest you must add opengl32.dll to your project folder! You can find it in release file for windows alongside rigctl-gui.exe.
 
-### Install from releae
+### Install from release
 
 #### Linux
 Install Hamlib on Linux
