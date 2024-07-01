@@ -80,7 +80,11 @@ func main() {
 	})
 	updateButtons(AMButton,FMButton,USBButton,LSBButton)
 	frqButton := widget.NewButton("Set frq", func() { //Set frq
-		_ = exec.Command("rigctl","-m2", "F",input.Text)
+		setfreq := exec.Command("rigctl","-m2", "F",input.Text)
+		_,err := setfreq.Output()
+		if err != nil {
+			fmt.Println(err)
+		}
 		updateButtons(AMButton,FMButton,USBButton,LSBButton)
 	})
 //BUGHERE
