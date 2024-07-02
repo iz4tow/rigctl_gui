@@ -65,17 +65,37 @@ func main() {
 
 	//Buttons
 	AMButton := widget.NewButton("AM", func() {
+		setmode := exec.Command("rigctl","-m2", "M", "AM" ,"3500")
+		_,err := setmode.Output()
+		if err != nil {
+			fmt.Println(err)
+		}
 		fmt.Println("AM")
 	})
 	
 	FMButton := widget.NewButton("FM", func() {
-		fmt.Println("FM")
+		setmode := exec.Command("rigctl","-m2", "M", "FM" ,"5000")
+		_,err := setmode.Output()
+		if err != nil {
+			fmt.Println(err)
+		}
+		fmt.Println("AM")
 	})
 	USBButton := widget.NewButton("USB", func() {
+		setmode := exec.Command("rigctl","-m2", "M", "USB" ,"2500")
+		_,err := setmode.Output()
+		if err != nil {
+			fmt.Println(err)
+		}
 		fmt.Println("USB")
 	})
 	
 	LSBButton := widget.NewButton("LSB", func() {
+		setmode := exec.Command("rigctl","-m2", "M", "LSB" ,"2500")
+		_,err := setmode.Output()
+		if err != nil {
+			fmt.Println(err)
+		}
 		fmt.Println("LSB")
 	})
 	updateButtons(AMButton,FMButton,USBButton,LSBButton)
@@ -85,7 +105,6 @@ func main() {
 		if err != nil {
 			fmt.Println(err)
 		}
-		updateButtons(AMButton,FMButton,USBButton,LSBButton)
 	})
 //BUGHERE
 //	input.OnSubmitted = func(string) { //Set freq if ENTER is pressed inside input entry
